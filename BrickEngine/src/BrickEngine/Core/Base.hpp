@@ -25,6 +25,7 @@ namespace BrickEngine {
 }
 
 #define BIT(x) (1 << x)
+#define STRINGIFY(x) #x
 
 #define BRICKENGINE_BIND_FN(fn) [this](auto&&... args) -> decltype(auto) { return this->fn(std::forward<decltype(args)>(args)...); }
 
