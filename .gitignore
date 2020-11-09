@@ -1,8 +1,8 @@
-# Directories
+# Binaries
 **/bin/
 **/bin-int/
 
-# Files
+# Visual Studio files and folder
 .vs/
 **.sln
 **.vcxproj
