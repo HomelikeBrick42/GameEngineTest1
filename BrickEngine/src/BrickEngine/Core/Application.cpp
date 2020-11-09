@@ -5,6 +5,7 @@ namespace BrickEngine {
 
 	Application::Application()
 	{
+		Log::Init();
 	}
 
 	Application::~Application()
