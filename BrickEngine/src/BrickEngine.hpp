@@ -6,6 +6,7 @@
 // Core
 #include "BrickEngine\Core\Base.hpp"
 #include "BrickEngine/Core/Application.hpp"
+#include "BrickEngine/Core/Window.hpp"
 
 // Events
 #include "BrickEngine/Events/Event.hpp"

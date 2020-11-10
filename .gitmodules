@@ -1,3 +1,6 @@
 [submodule "BrickEngine/vendor/spdlog"]
 	path = BrickEngine/vendor/spdlog
 	url = https://github.com/gabime/spdlog
+[submodule "BrickEngine/vendor/GLFW"]
+	path = BrickEngine/vendor/GLFW
+	url = https://github.com/HomelikeBrick42/glfw
