@@ -4,3 +4,7 @@
 [submodule "BrickEngine/vendor/GLFW"]
 	path = BrickEngine/vendor/GLFW
 	url = https://github.com/HomelikeBrick42/glfw
+[submodule "BrickEngine/vendor/imgui"]
+	path = BrickEngine/vendor/imgui
+	url = https://github.com/HomelikeBrick42/imgui
+	branch = docking

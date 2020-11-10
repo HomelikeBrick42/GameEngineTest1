@@ -19,6 +19,8 @@ namespace BrickEngine {
 		virtual uint32_t GetWidth() const override { return m_Data.Width; }
 		virtual uint32_t GetHeight() const override { return m_Data.Height; }
 
+		virtual void* GetNativeWindowHandle() override { return m_WindowHandle; }
+
 		virtual void SetEventCallback(const EventCallbackFn& eventCallback) override;
 		virtual void SetVSync(bool enabled) override;
 		virtual bool IsVSync() const override { return m_Data.VSync; }

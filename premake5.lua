@@ -20,10 +20,12 @@ IncludeDir = {}
 IncludeDir["spdlog"] = "%{wks.location}/BrickEngine/vendor/spdlog/include"
 IncludeDir["GLFW"] = "%{wks.location}/BrickEngine/vendor/GLFW/include"
 IncludeDir["glad"] = "%{wks.location}/BrickEngine/vendor/glad/include"
+IncludeDir["ImGui"] = "%{wks.location}/BrickEngine/vendor/imgui"
 
 group "Dependencies"
 	include "BrickEngine/vendor/GLFW"
 	include "BrickEngine/vendor/glad"
+	include "BrickEngine/vendor/imgui"
 group ""
 	
 project "BrickEngine"
@@ -50,13 +52,15 @@ project "BrickEngine"
 		"%{prj.name}/src",
 		"%{IncludeDir.spdlog}",
 		"%{IncludeDir.GLFW}",
-		"%{IncludeDir.glad}"
+		"%{IncludeDir.glad}",
+		"%{IncludeDir.ImGui}"
 	}
 	
 	links
 	{
 		"GLFW",
 		"glad",
+		"ImGui",
 		"opengl32.lib"
 	}
 
@@ -109,7 +113,8 @@ project "Sandbox"
 	{
 		"%{prj.name}/src",
 		"%{wks.location}/BrickEngine/src",
-		"%{IncludeDir.spdlog}"
+		"%{IncludeDir.spdlog}",
+		"%{IncludeDir.ImGui}"
 	}
 
 	links

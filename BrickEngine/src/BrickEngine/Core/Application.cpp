@@ -7,12 +7,20 @@
 
 namespace BrickEngine {
 
+	Application* Application::s_Application = nullptr;
+
 	Application::Application(const WindowProps& props)
 	{
 		Log::Init();
 
+		BRICKENGINE_CORE_ASSERT(!s_Application, "Application already exists!");
+		s_Application = this;
+
 		m_Window = Window::Create(props);
 		m_Window->SetEventCallback(BRICKENGINE_BIND_FN(OnEvent));
+
+		m_ImGuiLayer = new ImGuiLayer();
+		PushOverlay(m_ImGuiLayer);
 	}
 
 	Application::~Application()
@@ -28,6 +36,12 @@ namespace BrickEngine {
 
 			for (Layer* layer : m_LayerStack)
 				layer->OnUpdate();
+
+			m_ImGuiLayer->Begin();
+			for (Layer* layer : m_LayerStack)
+				layer->OnImGuiRender();
+			m_ImGuiLayer->End();
+
 			m_Window->OnUpdate();
 		}
 	}

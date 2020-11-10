@@ -4,6 +4,8 @@
 
 using namespace BrickEngine;
 
+#include <imgui.h>
+
 class SandboxLayer : public Layer
 {
 public:
@@ -18,6 +20,12 @@ public:
 
 	virtual void OnUpdate() override
 	{
+	}
+
+	virtual void OnImGuiRender() override
+	{
+		ImGui::Begin("Test");
+		ImGui::End();
 	}
 
 	virtual void OnEvent(Event& e) override
