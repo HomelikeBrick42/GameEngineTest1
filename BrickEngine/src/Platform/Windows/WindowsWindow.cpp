@@ -7,6 +7,8 @@
 
 #ifdef BRICKENGINE_PLATFORM_WINDOWS
 
+#include <glad/glad.h>
+
 namespace BrickEngine {
 
 	static uint32_t s_WindowCount = 0;
@@ -27,7 +29,7 @@ namespace BrickEngine {
 		m_Data.Width = props.Width;
 		m_Data.Height = props.Height;
 
-		Log::CoreInfo("Creating window '{0}' ({1}, {2})", m_Data.Title, m_Data.Width, m_Data.Height);
+		Log::CoreTrace("Creating window '{0}' ({1}, {2})", m_Data.Title, m_Data.Width, m_Data.Height);
 
 		if (s_WindowCount == 0)
 		{
@@ -39,6 +41,8 @@ namespace BrickEngine {
 
 		m_WindowHandle = glfwCreateWindow((int32_t)m_Data.Width, (int32_t)m_Data.Height, m_Data.Title.c_str(), nullptr, nullptr);
 		glfwMakeContextCurrent(m_WindowHandle);
+		int32_t success = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+		BRICKENGINE_CORE_ASSERT(success, "Could not initalize glad!");
 		SetVSync(true);
 	}
 

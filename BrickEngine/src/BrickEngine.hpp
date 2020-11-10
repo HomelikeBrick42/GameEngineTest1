@@ -13,3 +13,7 @@
 #include "BrickEngine/Events/KeyEvent.hpp"
 #include "BrickEngine/Events/MouseEvent.hpp"
 #include "BrickEngine/Events/WindowEvent.hpp"
+
+// Layers
+#include "BrickEngine/Core/Layer.hpp"
+#include "BrickEngine/Core/LayerStack.hpp"
