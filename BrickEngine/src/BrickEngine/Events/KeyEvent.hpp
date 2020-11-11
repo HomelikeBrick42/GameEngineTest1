@@ -2,25 +2,27 @@
 
 #include "BrickEngine/Events/Event.hpp"
 
+#include "BrickEngine/Core/KeyCodes.hpp"
+
 namespace BrickEngine {
 
 	class KeyEvent : public Event
 	{
 	public:
-		int32_t GetKeyCode() const { return m_KeyCode; }
+		KeyCode GetKeyCode() const { return m_KeyCode; }
 
 		EVENT_CLASS_CATEGORY(EventCategoryInput | EventCategoryKeyboard)
 	protected:
-		KeyEvent(int32_t keycode)
+		KeyEvent(KeyCode keycode)
 			: m_KeyCode(keycode) {}
 	protected:
-		int32_t m_KeyCode;
+		KeyCode m_KeyCode;
 	};
 
 	class KeyPressedEvent : public KeyEvent
 	{
 	public:
-		KeyPressedEvent(int32_t keycode, uint32_t repeatCount)
+		KeyPressedEvent(KeyCode keycode, uint32_t repeatCount)
 			: KeyEvent(keycode), m_RepeatCount(repeatCount) {}
 
 		uint32_t GetRepeatCount() const { return m_RepeatCount; }
@@ -28,7 +30,7 @@ namespace BrickEngine {
 		virtual std::string ToString() const override
 		{
 			std::stringstream ss;
-			ss << "KeyPressedEvent: " << m_KeyCode << " (" << m_RepeatCount << " repeats)";
+			ss << "KeyPressedEvent: " << (int32_t)m_KeyCode << " (" << m_RepeatCount << " repeats)";
 			return ss.str();
 		}
 
@@ -40,13 +42,13 @@ namespace BrickEngine {
 	class KeyReleasedEvent : public KeyEvent
 	{
 	public:
-		KeyReleasedEvent(int32_t keycode)
+		KeyReleasedEvent(KeyCode keycode)
 			: KeyEvent(keycode) {}
 
 		virtual std::string ToString() const override
 		{
 			std::stringstream ss;
-			ss << "KeyReleasedEvent: " << m_KeyCode;
+			ss << "KeyReleasedEvent: " << (int32_t)m_KeyCode;
 			return ss.str();
 		}
 

@@ -4,9 +4,11 @@
 #include "brickpch.hpp"
 
 // Core
-#include "BrickEngine\Core\Base.hpp"
+#include "BrickEngine/Core/Base.hpp"
 #include "BrickEngine/Core/Application.hpp"
 #include "BrickEngine/Core/Window.hpp"
+#include "BrickEngine/Core/KeyCodes.hpp"
+#include "BrickEngine/Core/Input.hpp"
 
 // Events
 #include "BrickEngine/Events/Event.hpp"

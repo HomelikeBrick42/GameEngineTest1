@@ -7,26 +7,26 @@ namespace BrickEngine {
 	class MouseButtonEvent : public Event
 	{
 	public:
-		int32_t GetMouseButton() const { return m_Button; }
+		MouseButton GetMouseButton() const { return m_Button; }
 
 		EVENT_CLASS_CATEGORY(EventCategoryInput | EventCategoryMouse | EventCategoryMouseButton)
 	protected:
-		MouseButtonEvent(int32_t button)
+		MouseButtonEvent(MouseButton button)
 			: m_Button(button) {}
 	protected:
-		int32_t m_Button;
+		MouseButton m_Button;
 	};
 
 	class MouseButtonPressedEvent : public MouseButtonEvent
 	{
 	public:
-		MouseButtonPressedEvent(int32_t button)
+		MouseButtonPressedEvent(MouseButton button)
 			: MouseButtonEvent(button) {}
 
 		virtual std::string ToString() const override
 		{
 			std::stringstream ss;
-			ss << "MouseButtonPressedEvent: " << m_Button;
+			ss << "MouseButtonPressedEvent: " << (int32_t)m_Button;
 			return ss.str();
 		}
 
@@ -36,13 +36,13 @@ namespace BrickEngine {
 	class MouseButtonReleasedEvent : public MouseButtonEvent
 	{
 	public:
-		MouseButtonReleasedEvent(int32_t button)
+		MouseButtonReleasedEvent(MouseButton button)
 			: MouseButtonEvent(button) {}
 
 		virtual std::string ToString() const override
 		{
 			std::stringstream ss;
-			ss << "MouseButtonReleasedEvent: " << m_Button;
+			ss << "MouseButtonReleasedEvent: " << (int32_t)m_Button;
 			return ss.str();
 		}
 

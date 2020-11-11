@@ -2,6 +2,7 @@
 #include "BrickEngine/Core/Application.hpp"
 
 #include "BrickEngine/Events/WindowEvent.hpp"
+#include "BrickEngine/Core/Input.hpp"
 
 #include <glad/glad.h>
 
@@ -12,6 +13,7 @@ namespace BrickEngine {
 	Application::Application(const WindowProps& props)
 	{
 		Log::Init();
+		Input::Init();
 
 		BRICKENGINE_CORE_ASSERT(!s_Application, "Application already exists!");
 		s_Application = this;
@@ -42,6 +44,7 @@ namespace BrickEngine {
 				layer->OnImGuiRender();
 			m_ImGuiLayer->End();
 
+			Input::EndFrame();
 			m_Window->OnUpdate();
 		}
 	}
@@ -61,6 +64,8 @@ namespace BrickEngine {
 				break;
 			(*it)->OnEvent(e);
 		}
+		
+		Input::OnEvent(e);
 	}
 
 }

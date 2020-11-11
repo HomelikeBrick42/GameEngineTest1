@@ -18,17 +18,15 @@ public:
 	{
 	}
 
-	virtual void OnUpdate() override
+	void OnUpdate() override
 	{
 	}
 
-	virtual void OnImGuiRender() override
+	void OnImGuiRender() override
 	{
-		ImGui::Begin("Test");
-		ImGui::End();
 	}
 
-	virtual void OnEvent(Event& e) override
+	void OnEvent(Event& e) override
 	{
 	}
 private:

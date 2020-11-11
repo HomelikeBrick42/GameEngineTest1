@@ -29,7 +29,7 @@ namespace BrickEngine {
 		m_Data.Width = props.Width;
 		m_Data.Height = props.Height;
 
-		Log::CoreTrace("Creating window '{0}' ({1}, {2})", m_Data.Title, m_Data.Width, m_Data.Height);
+		Log::CoreTrace("Creating window '{0}' ({1}, {2})", m_Data.Title, m_Data.Width, m_Data.Height); 
 
 		if (s_WindowCount == 0)
 		{
@@ -105,13 +105,13 @@ namespace BrickEngine {
 				switch (action)
 				{
 				case GLFW_PRESS:
-					data.EventCallback(KeyPressedEvent(key, 0));
+					data.EventCallback(KeyPressedEvent((KeyCode)key, 0));
 					break;
 				case GLFW_REPEAT:
-					data.EventCallback(KeyPressedEvent(key, 1));
+					data.EventCallback(KeyPressedEvent((KeyCode)key, 1));
 					break;
 				case GLFW_RELEASE:
-					data.EventCallback(KeyReleasedEvent(key));
+					data.EventCallback(KeyReleasedEvent((KeyCode)key));
 					break;
 				}
 			});
@@ -122,10 +122,10 @@ namespace BrickEngine {
 				switch (action)
 				{
 				case GLFW_PRESS:
-					data.EventCallback(MouseButtonPressedEvent(button));
+					data.EventCallback(MouseButtonPressedEvent((MouseButton)button));
 					break;
 				case GLFW_RELEASE:
-					data.EventCallback(MouseButtonReleasedEvent(button));
+					data.EventCallback(MouseButtonReleasedEvent((MouseButton)button));
 					break;
 				}
 			});
