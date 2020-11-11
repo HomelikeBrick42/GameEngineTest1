@@ -21,5 +21,6 @@
 #include "BrickEngine/Core/LayerStack.hpp"
 
 // Scene
+#include "BrickEngine/Scene/Components.hpp"
 #include "BrickEngine/Scene/Entity.hpp"
 #include "BrickEngine/Scene/Scene.hpp"
