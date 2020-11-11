@@ -10,7 +10,7 @@ class SandboxLayer : public Layer
 {
 public:
 	SandboxLayer()
-		: Layer("Sandbox Layer")
+		: Layer("SandboxLayer")
 	{
 	}
 

@@ -21,6 +21,7 @@ IncludeDir["spdlog"] = "%{wks.location}/BrickEngine/vendor/spdlog/include"
 IncludeDir["GLFW"] = "%{wks.location}/BrickEngine/vendor/GLFW/include"
 IncludeDir["glad"] = "%{wks.location}/BrickEngine/vendor/glad/include"
 IncludeDir["ImGui"] = "%{wks.location}/BrickEngine/vendor/imgui"
+IncludeDir["glm"] = "%{wks.location}/BrickEngine/vendor/glm"
 
 group "Dependencies"
 	include "BrickEngine/vendor/GLFW"
@@ -44,7 +45,9 @@ project "BrickEngine"
 	files
 	{
 		"%{prj.name}/src/**.hpp",
-		"%{prj.name}/src/**.cpp"
+		"%{prj.name}/src/**.cpp",
+		"%{prj.name}/vendor/glm/glm/**.hpp",
+		"%{prj.name}/vendor/glm/glm/**.inl"
 	}
 	
 	includedirs
@@ -53,7 +56,8 @@ project "BrickEngine"
 		"%{IncludeDir.spdlog}",
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.glad}",
-		"%{IncludeDir.ImGui}"
+		"%{IncludeDir.ImGui}",
+		"%{IncludeDir.glm}"
 	}
 	
 	links
@@ -67,7 +71,7 @@ project "BrickEngine"
 	defines
 	{
 		"_CRT_SECURE_NO_WARNINGS",
-		"GLFW_INCLUDE_NONE"
+		"GLM_FORCE_SWIZZLE"
 	}
 
 	filter "system:windows"
@@ -75,7 +79,8 @@ project "BrickEngine"
 
 		defines
 		{
-			"BRICKENGINE_PLATFORM_WINDOWS"
+			"BRICKENGINE_PLATFORM_WINDOWS",
+			"GLFW_INCLUDE_NONE"
 		}
 
 	filter "configurations:Debug"
@@ -114,12 +119,18 @@ project "Sandbox"
 		"%{prj.name}/src",
 		"%{wks.location}/BrickEngine/src",
 		"%{IncludeDir.spdlog}",
-		"%{IncludeDir.ImGui}"
+		"%{IncludeDir.ImGui}",
+		"%{IncludeDir.glm}"
 	}
 
 	links
 	{
 		"BrickEngine"
+	}
+
+	defines
+	{
+		"GLM_FORCE_SWIZZLE"
 	}
 
 	filter "system:windows"
