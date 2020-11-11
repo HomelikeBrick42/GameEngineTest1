@@ -11,3 +11,6 @@
 [submodule "BrickEngine/vendor/glm"]
 	path = BrickEngine/vendor/glm
 	url = https://github.com/g-truc/glm
+[submodule "BrickEngine/vendor/entt"]
+	path = BrickEngine/vendor/entt
+	url = https://github.com/skypjack/entt

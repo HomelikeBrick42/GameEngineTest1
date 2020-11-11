@@ -22,6 +22,7 @@ IncludeDir["GLFW"] = "%{wks.location}/BrickEngine/vendor/GLFW/include"
 IncludeDir["glad"] = "%{wks.location}/BrickEngine/vendor/glad/include"
 IncludeDir["ImGui"] = "%{wks.location}/BrickEngine/vendor/imgui"
 IncludeDir["glm"] = "%{wks.location}/BrickEngine/vendor/glm"
+IncludeDir["entt"] = "%{wks.location}/BrickEngine/vendor/entt/single_include"
 
 group "Dependencies"
 	include "BrickEngine/vendor/GLFW"
@@ -57,7 +58,8 @@ project "BrickEngine"
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.glad}",
 		"%{IncludeDir.ImGui}",
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.entt}"
 	}
 	
 	links
@@ -120,7 +122,8 @@ project "Sandbox"
 		"%{wks.location}/BrickEngine/src",
 		"%{IncludeDir.spdlog}",
 		"%{IncludeDir.ImGui}",
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.entt}"
 	}
 
 	links
