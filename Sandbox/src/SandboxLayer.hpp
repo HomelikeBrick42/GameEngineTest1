@@ -10,11 +10,14 @@ class SandboxLayer : public Layer
 {
 public:
 	SandboxLayer()
-		: Layer("SandboxLayer")
+		: Layer("SandboxLayer") {}
+
+	void OnAttach() override
 	{
+		m_Triangle = m_Scene.CreateEntity("Triangle");
 	}
 
-	~SandboxLayer()
+	void OnDetach() override
 	{
 	}
 
@@ -30,4 +33,6 @@ public:
 	{
 	}
 private:
+	Scene m_Scene;
+	Entity m_Triangle;
 };

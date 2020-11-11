@@ -19,3 +19,7 @@
 // Layers
 #include "BrickEngine/Core/Layer.hpp"
 #include "BrickEngine/Core/LayerStack.hpp"
+
+// Scene
+#include "BrickEngine/Scene/Entity.hpp"
+#include "BrickEngine/Scene/Scene.hpp"
