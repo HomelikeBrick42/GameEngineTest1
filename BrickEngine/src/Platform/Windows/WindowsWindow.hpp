@@ -6,7 +6,7 @@
 
 #include <GLFW/glfw3.h>
 
-#include "Platform/OpenGL/OpenGLGraphicsContext.hpp"
+#include "Platform/Windows/WindowsOpenGLGraphicsContext.hpp"
 
 namespace BrickEngine {
 

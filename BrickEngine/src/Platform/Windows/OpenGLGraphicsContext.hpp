@@ -6,10 +6,10 @@
 
 namespace BrickEngine {
 
-	class OpenGLGraphicsContext : public GraphicsContext
+	class WindowsOpenGLGraphicsContext : public GraphicsContext
 	{
 	public:
-		OpenGLGraphicsContext(GLFWwindow* window);
+		WindowsOpenGLGraphicsContext(GLFWwindow* window);
 
 		virtual void Bind() override;
 		virtual void SwapBuffers() override;

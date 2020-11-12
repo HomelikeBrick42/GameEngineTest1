@@ -26,7 +26,7 @@ public:
 		m_FPS = 1.0f / dt;
 		m_Scene.OnUpdate(dt);
 
-		RenderCommand::SetClearColor(glm::vec3(0.1f));
+		RenderCommand::SetClearColor(glm::vec3(0.1f, 0.1f, 0.1f));
 		RenderCommand::Clear();
 	}
 

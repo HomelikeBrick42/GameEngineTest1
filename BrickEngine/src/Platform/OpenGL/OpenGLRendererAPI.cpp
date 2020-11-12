@@ -51,4 +51,14 @@ namespace BrickEngine {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
 
+	void OpenGLRendererAPI::Draw(uint32_t first, uint32_t count)
+	{
+		glDrawArrays(GL_TRIANGLES, first, count);
+	}
+
+	void OpenGLRendererAPI::DrawIndexed(uint32_t count)
+	{
+		glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_INT, nullptr);
+	}
+
 }

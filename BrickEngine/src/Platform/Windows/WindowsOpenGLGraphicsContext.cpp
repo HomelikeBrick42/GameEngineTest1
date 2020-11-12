@@ -1,23 +1,23 @@
 #include "brickpch.hpp"
-#include "Platform/OpenGL/OpenGLGraphicsContext.hpp"
+#include "Platform/Windows/WindowsOpenGLGraphicsContext.hpp"
 
 #include <glad/glad.h>
 
 namespace BrickEngine {
 
-	OpenGLGraphicsContext::OpenGLGraphicsContext(GLFWwindow* window)
+	WindowsOpenGLGraphicsContext::WindowsOpenGLGraphicsContext(GLFWwindow* window)
 		: m_Window(window)
 	{
 	}
 
-	void OpenGLGraphicsContext::Bind()
+	void WindowsOpenGLGraphicsContext::Bind()
 	{
 		glfwMakeContextCurrent(m_Window);
 		int32_t success = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 		BRICKENGINE_CORE_ASSERT(success, "Failed to initalize GLAD!");
 	}
 
-	void OpenGLGraphicsContext::SwapBuffers()
+	void WindowsOpenGLGraphicsContext::SwapBuffers()
 	{
 		glfwSwapBuffers(m_Window);
 	}
