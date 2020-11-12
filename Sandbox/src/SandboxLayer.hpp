@@ -24,6 +24,8 @@ public:
 	void OnUpdate(float dt) override
 	{
 		m_Scene.OnUpdate(dt);
+		glm::vec2 mouseDelta = Input::GetMouseDelta();
+		Log::Info("{0}, {1}", mouseDelta.x, mouseDelta.y);
 	}
 
 	void OnImGuiRender() override

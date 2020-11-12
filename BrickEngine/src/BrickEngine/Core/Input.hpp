@@ -18,6 +18,11 @@ namespace BrickEngine {
 		static bool GetKeyDown(KeyCode key);
 		static bool GetKeyUp(KeyCode key);
 
+		static glm::vec2 GetMousePosition();
+		static glm::vec2 GetMouseDelta();
+
+		static glm::vec2 GetMouseScroll();
+
 		static bool GetMouseButton(MouseButton button);
 		static bool GetMouseButtonDown(MouseButton button);
 		static bool GetMouseButtonUp(MouseButton button);

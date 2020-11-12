@@ -16,6 +16,11 @@ namespace BrickEngine {
         std::array<bool, 8> MouseButtons;
         std::array<bool, 8> MouseButtonsDown;
         std::array<bool, 8> MouseButtonsUp;
+
+        glm::vec2 MousePosition;
+        glm::vec2 LastMousePosition;
+        glm::vec2 MousePositionDelta;
+        glm::vec2 MouseScroll;
     };
     static Scope<InputData> s_Data = nullptr;
 
@@ -34,6 +39,11 @@ namespace BrickEngine {
             s_Data->MouseButtonsDown[i] = false;
             s_Data->MouseButtonsUp[i] = false;
         }
+
+        s_Data->MousePosition = glm::vec2(0.0f, 0.0f);
+        s_Data->LastMousePosition = glm::vec2(0.0f, 0.0f);
+        s_Data->MousePositionDelta = glm::vec2(0.0f, 0.0f);
+        s_Data->MouseScroll = glm::vec2(0.0f, 0.0f);
     }
 
     void Input::EndFrame()
@@ -48,6 +58,9 @@ namespace BrickEngine {
             s_Data->MouseButtonsDown[i] = false;
             s_Data->MouseButtonsUp[i] = false;
         }
+        s_Data->MousePositionDelta = s_Data->MousePosition - s_Data->LastMousePosition;
+        s_Data->LastMousePosition = s_Data->MousePosition;
+        s_Data->MouseScroll = glm::vec2(0.0f, 0.0f);
     }
 
     bool Input::GetKey(KeyCode key)
@@ -66,6 +79,21 @@ namespace BrickEngine {
     {
         BRICKENGINE_CORE_ASSERT((int32_t)key < 0 && (int32_t)key > 348, "Attempted to get invalid key: {0}", (int32_t)key);
         return s_Data->KeysUp[(int32_t)key];
+    }
+
+    glm::vec2 Input::GetMousePosition()
+    {
+        return s_Data->MousePosition;
+    }
+
+    glm::vec2 Input::GetMouseDelta()
+    {
+        return s_Data->MousePositionDelta;
+    }
+
+    glm::vec2 Input::GetMouseScroll()
+    {
+        return s_Data->MouseScroll;
     }
 
     bool Input::GetMouseButton(MouseButton button)
@@ -116,6 +144,17 @@ namespace BrickEngine {
                 if (s_Data->MouseButtons[(int32_t)e.GetMouseButton()])
                     s_Data->MouseButtonsUp[(int32_t)e.GetMouseButton()] = true;
                 s_Data->MouseButtons[(int32_t)e.GetMouseButton()] = false;
+                return false;
+            });
+
+        dispatcher.Dispatch<MouseMovedEvent>([](MouseMovedEvent& e) -> bool
+            {
+                s_Data->MousePosition = glm::vec2(e.GetX(), e.GetY());
+                return false;
+            });
+        dispatcher.Dispatch<MouseScrolledEvent>([](MouseScrolledEvent& e) -> bool
+            {
+                s_Data->MouseScroll = glm::vec2(e.GetXOffset(), e.GetYOffset());
                 return false;
             });
 
