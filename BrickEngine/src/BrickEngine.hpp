@@ -24,3 +24,6 @@
 #include "BrickEngine/Scene/Components.hpp"
 #include "BrickEngine/Scene/Entity.hpp"
 #include "BrickEngine/Scene/Scene.hpp"
+
+// Scripting
+#include "BrickEngine/Scene/EntityScript.hpp"

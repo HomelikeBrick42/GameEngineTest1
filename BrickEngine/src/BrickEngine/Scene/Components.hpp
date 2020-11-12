@@ -2,6 +2,8 @@
 
 #include "BrickEngine/Core/Base.hpp"
 
+#include "BrickEngine/Scene/EntityScript.hpp"
+
 namespace BrickEngine {
 
 	struct TagComponent
@@ -35,6 +37,39 @@ namespace BrickEngine {
 		}
 
 		operator glm::mat4() const { return ToMatrix(); }
+	};
+
+	struct NativeScriptComponent
+	{
+		NativeScriptComponent() = default;
+		~NativeScriptComponent()
+		{
+			if (Instance)
+				DestroyScript();
+		}
+
+		EntityScript* Instance = nullptr;
+		std::function<void(Entity)> InstantiateScript = nullptr;
+		std::function<void()> DestroyScript = nullptr;
+
+		template<typename T, typename... Args>
+		void Bind(Args&&... args)
+		{
+			if (Instance)
+				DestroyScript();
+			InstantiateScript = [&](Entity entity)
+			{
+				Instance = new T(args...);
+				Instance->m_Entity = entity;
+				Instance->OnCreate();
+			};
+			DestroyScript = [&]()
+			{
+				Instance->OnDestroy();
+				delete Instance;
+				Instance = nullptr;
+			};
+		}
 	};
 
 }

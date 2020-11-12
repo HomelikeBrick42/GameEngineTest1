@@ -21,8 +21,9 @@ public:
 	{
 	}
 
-	void OnUpdate() override
+	void OnUpdate(float dt) override
 	{
+		m_Scene.OnUpdate(dt);
 	}
 
 	void OnImGuiRender() override

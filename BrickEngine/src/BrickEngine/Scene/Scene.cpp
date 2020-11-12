@@ -4,6 +4,9 @@
 #include "BrickEngine/Scene/Entity.hpp"
 #include "BrickEngine/Scene/Components.hpp"
 
+#pragma warning(push)
+#pragma warning(disable : 4267)
+
 namespace BrickEngine {
 
     Scene::Scene()
@@ -30,4 +33,16 @@ namespace BrickEngine {
             Log::Error("Attemped to destroy entity that is not of this scene!");
     }
 
+    void Scene::OnUpdate(float dt)
+    {
+        m_Registry.view<NativeScriptComponent>().each([&](entt::entity id, NativeScriptComponent& nsc)
+            {
+                if (!nsc.Instance)
+                    nsc.InstantiateScript(Entity(id, this));
+                nsc.Instance->OnUpdate(dt);
+            });
+    }
+
 }
+
+#pragma warning(pop)

@@ -15,6 +15,8 @@ namespace BrickEngine {
 
 		Entity CreateEntity(const std::string& name);
 		void DestroyEntity(Entity entity);
+
+		void OnUpdate(float dt);
 	private:
 		entt::registry m_Registry;
 	};

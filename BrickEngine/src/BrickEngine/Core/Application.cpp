@@ -31,13 +31,20 @@ namespace BrickEngine {
 
 	void Application::Run()
 	{
+		auto lastFrame = std::chrono::high_resolution_clock::now();
+		auto time = std::chrono::high_resolution_clock::now();
+		float delta;
 		while (m_Running)
 		{
+			time = std::chrono::high_resolution_clock::now();
+			delta = std::chrono::duration<float>(time - lastFrame).count();
+			lastFrame = time;
+
 			glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 			for (Layer* layer : m_LayerStack)
-				layer->OnUpdate();
+				layer->OnUpdate(delta);
 
 			m_ImGuiLayer->Begin();
 			for (Layer* layer : m_LayerStack)
