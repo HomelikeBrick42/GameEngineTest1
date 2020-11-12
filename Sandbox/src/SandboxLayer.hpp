@@ -23,13 +23,18 @@ public:
 
 	void OnUpdate(float dt) override
 	{
+		m_FPS = 1.0f / dt;
 		m_Scene.OnUpdate(dt);
-		glm::vec2 mouseDelta = Input::GetMouseDelta();
-		Log::Info("{0}, {1}", mouseDelta.x, mouseDelta.y);
+
+		RenderCommand::SetClearColor(glm::vec3(0.1f));
+		RenderCommand::Clear();
 	}
 
 	void OnImGuiRender() override
 	{
+		ImGui::Begin("Info");
+		ImGui::Text("FPS: %g", m_FPS);
+		ImGui::End();
 	}
 
 	void OnEvent(Event& e) override
@@ -38,4 +43,6 @@ public:
 private:
 	Scene m_Scene;
 	Entity m_Triangle;
+private:
+	float m_FPS = 0.0f;
 };

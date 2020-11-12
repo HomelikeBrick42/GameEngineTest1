@@ -27,3 +27,9 @@
 
 // Scripting
 #include "BrickEngine/Scene/EntityScript.hpp"
+
+// Renderer
+#include "BrickEngine/Renderer/GraphicsContext.hpp"
+#include "BrickEngine/Renderer/RendererAPI.hpp"
+#include "BrickEngine/Renderer/RenderCommand.hpp"
+#include "BrickEngine/Renderer/Renderer.hpp"

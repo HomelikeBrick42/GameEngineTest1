@@ -4,7 +4,8 @@
 #include "BrickEngine/Events/WindowEvent.hpp"
 #include "BrickEngine/Core/Input.hpp"
 
-#include <glad/glad.h>
+#include "BrickEngine/Renderer/Renderer.hpp"
+#include "BrickEngine/Renderer/RenderCommand.hpp"
 
 namespace BrickEngine {
 
@@ -13,13 +14,15 @@ namespace BrickEngine {
 	Application::Application(const WindowProps& props)
 	{
 		Log::Init();
-		Input::Init();
 
 		BRICKENGINE_CORE_ASSERT(!s_Application, "Application already exists!");
 		s_Application = this;
 
 		m_Window = Window::Create(props);
 		m_Window->SetEventCallback(BRICKENGINE_BIND_FN(OnEvent));
+
+		Input::Init();
+		Renderer::Init();
 
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);
@@ -39,9 +42,6 @@ namespace BrickEngine {
 			time = std::chrono::high_resolution_clock::now();
 			delta = std::chrono::duration<float>(time - lastFrame).count();
 			lastFrame = time;
-
-			glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 			for (Layer* layer : m_LayerStack)
 				layer->OnUpdate(delta);

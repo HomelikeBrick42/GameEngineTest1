@@ -6,6 +6,8 @@
 
 #include <GLFW/glfw3.h>
 
+#include "Platform/OpenGL/OpenGLGraphicsContext.hpp"
+
 namespace BrickEngine {
 
 	class WindowsWindow : public Window
@@ -26,6 +28,7 @@ namespace BrickEngine {
 		virtual bool IsVSync() const override { return m_Data.VSync; }
 	private:
 		GLFWwindow* m_WindowHandle = nullptr;
+		Scope<GraphicsContext> m_Context = nullptr;
 
 		struct WindowData
 		{
