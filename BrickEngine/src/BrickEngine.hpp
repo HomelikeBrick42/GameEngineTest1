@@ -33,3 +33,6 @@
 #include "BrickEngine/Renderer/RendererAPI.hpp"
 #include "BrickEngine/Renderer/RenderCommand.hpp"
 #include "BrickEngine/Renderer/Renderer.hpp"
+
+// Renderer Objects
+#include "BrickEngine/Renderer/VertexBuffer.hpp"
