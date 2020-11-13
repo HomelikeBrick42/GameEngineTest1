@@ -27,6 +27,11 @@ public:
 		m_VertexBuffer->SetLayout({
 			{ ShaderDataType::Float3, "a_Position" }
 		});
+
+		uint32_t indices[] = {
+			0, 1, 2
+		};
+		m_IndexBuffer = IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t));
 	}
 
 	void OnDetach() override
@@ -41,10 +46,11 @@ public:
 		RenderCommand::SetClearColor(glm::vec3(0.1f, 0.1f, 0.1f));
 		RenderCommand::Clear();
 
-		m_Shader->SetFloat4("u_Color", glm::vec4(1.0f, 1.0f, 0.0f, 1.0f));
 		m_Shader->Bind();
+		m_Shader->SetFloat4("u_Color", glm::vec4(1.0f, 1.0f, 0.0f, 1.0f));
 		m_VertexBuffer->Bind();
-		RenderCommand::Draw(0, 3);
+		m_IndexBuffer->Bind();
+		RenderCommand::DrawIndexed(m_IndexBuffer->GetCount());
 	}
 
 	void OnImGuiRender() override
@@ -62,6 +68,7 @@ private:
 	Entity m_Triangle;
 	Ref<Shader> m_Shader;
 	Ref<VertexBuffer> m_VertexBuffer;
+	Ref<IndexBuffer> m_IndexBuffer;
 private:
 	float m_FPS = 0.0f;
 };

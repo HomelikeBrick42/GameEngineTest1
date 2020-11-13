@@ -37,3 +37,4 @@
 // Renderer Objects
 #include "BrickEngine/Renderer/Shader.hpp"
 #include "BrickEngine/Renderer/VertexBuffer.hpp"
+#include "BrickEngine/Renderer/IndexBuffer.hpp"
