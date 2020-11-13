@@ -16,6 +16,8 @@ public:
 	{
 		m_Triangle = m_Scene.CreateEntity("Triangle");
 
+		m_Shader = Shader::Create("assets/shaders/FlatColor.vert.glsl", "assets/shaders/FlatColor.frag.glsl");
+
 		float vertices[] = {
 			 0.0f,  0.5f, 0.0f,
 			 0.5f, -0.5f, 0.0f,
@@ -39,6 +41,8 @@ public:
 		RenderCommand::SetClearColor(glm::vec3(0.1f, 0.1f, 0.1f));
 		RenderCommand::Clear();
 
+		m_Shader->SetFloat4("u_Color", glm::vec4(1.0f, 1.0f, 0.0f, 1.0f));
+		m_Shader->Bind();
 		m_VertexBuffer->Bind();
 		RenderCommand::Draw(0, 3);
 	}
@@ -56,6 +60,7 @@ public:
 private:
 	Scene m_Scene;
 	Entity m_Triangle;
+	Ref<Shader> m_Shader;
 	Ref<VertexBuffer> m_VertexBuffer;
 private:
 	float m_FPS = 0.0f;

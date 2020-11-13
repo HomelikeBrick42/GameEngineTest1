@@ -35,4 +35,5 @@
 #include "BrickEngine/Renderer/Renderer.hpp"
 
 // Renderer Objects
+#include "BrickEngine/Renderer/Shader.hpp"
 #include "BrickEngine/Renderer/VertexBuffer.hpp"
