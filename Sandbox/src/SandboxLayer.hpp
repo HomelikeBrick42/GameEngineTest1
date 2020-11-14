@@ -62,6 +62,12 @@ public:
 
 	void OnEvent(Event& e) override
 	{
+		EventDispatcher dispatcher(e);
+		dispatcher.Dispatch<WindowResizeEvent>([&](WindowResizeEvent& e) -> bool
+			{
+				RenderCommand::SetViewport(0, 0, e.GetWidth(), e.GetHeight());
+				return false;
+			});
 	}
 private:
 	Scene m_Scene;
