@@ -2,7 +2,12 @@
 
 #include "BrickEngine/Core/Base.hpp"
 
+#include "BrickEngine/Core/Application.hpp"
+
 #include "BrickEngine/Scene/EntityScript.hpp"
+
+#include "BrickEngine/Renderer/Shader.hpp"
+#include "BrickEngine/Renderer/Mesh.hpp"
 
 namespace BrickEngine {
 
@@ -37,6 +42,40 @@ namespace BrickEngine {
 		}
 
 		operator glm::mat4() const { return ToMatrix(); }
+	};
+
+	struct CameraComponent
+	{
+		float Fov;
+		float Aspect;
+		float Near;
+		float Far;
+
+		CameraComponent()
+			: Fov(glm::radians(45.0f)), Aspect((float)Application::Get().GetWindow()->GetWidth() / (float)Application::Get().GetWindow()->GetHeight()), Near(0.001f), Far(1000.0f) {}
+		CameraComponent(float fov, float aspect, float _near, float _far)
+			: Fov(fov), Aspect(aspect), Near(_near), Far(_far) {}
+
+		glm::mat4 ToMatrix() const
+		{
+			return glm::perspective(Fov, Aspect, Near, Far);
+		}
+
+		operator glm::mat4() const { return ToMatrix(); }
+	};
+
+	struct MeshRendererComponent
+	{
+		Ref<Shader> Shader;
+		Ref<Mesh> Mesh;
+		glm::vec4 Color;
+		
+		MeshRendererComponent()
+			: Shader(nullptr), Mesh(nullptr), Color(1.0f) {}
+		MeshRendererComponent(const Ref<BrickEngine::Shader>& shader, const Ref<BrickEngine::Mesh>& mesh, const glm::vec4& color)
+			: Shader(shader), Mesh(mesh), Color(color) {}
+
+		operator bool() const { return Shader != nullptr && Mesh != nullptr; }
 	};
 
 	struct NativeScriptComponent
