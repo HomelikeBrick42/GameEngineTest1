@@ -44,9 +44,9 @@ public:
 			glm::inverse(glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 3.0f)))
 		);
 
-		std::pair<Ref<VertexBuffer>, Ref<IndexBuffer>> mesh = MeshFactory::GenerateCube(glm::vec3(1.0f, 1.0f, 1.0f));
-		m_VertexBuffer = std::get<0>(mesh);
-		m_IndexBuffer = std::get<1>(mesh);
+		Ref<Mesh> mesh = MeshFactory::GenerateCube(glm::vec3(1.0f, 1.0f, 1.0f));
+		m_VertexBuffer = mesh->GetVertexBuffer();
+		m_IndexBuffer = mesh->GetIndexBuffer();
 	}
 
 	void OnDetach() override

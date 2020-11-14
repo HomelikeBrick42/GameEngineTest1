@@ -3,7 +3,7 @@
 
 namespace BrickEngine {
 
-    std::pair<Ref<VertexBuffer>, Ref<IndexBuffer>> MeshFactory::GenerateCube(const glm::vec3& size)
+    Ref<Mesh> MeshFactory::GenerateCube(const glm::vec3& size)
     {
         struct Vertex
         {
@@ -66,7 +66,7 @@ namespace BrickEngine {
 
         Ref<IndexBuffer> indexBuffer = IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t));
 
-        return { vertexBuffer, indexBuffer };
+        return CreateRef<Mesh>(vertexBuffer, indexBuffer);
     }
 
 }
