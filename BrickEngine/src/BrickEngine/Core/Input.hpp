@@ -10,6 +10,7 @@ namespace BrickEngine {
 	class Input
 	{
 	public:
+		Input() = delete;
 		static void Init();
 		static void OnEvent(Event& e);
 		static void EndFrame();

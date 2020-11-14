@@ -38,3 +38,6 @@
 #include "BrickEngine/Renderer/Shader.hpp"
 #include "BrickEngine/Renderer/VertexBuffer.hpp"
 #include "BrickEngine/Renderer/IndexBuffer.hpp"
+
+// Renderer Util
+#include "BrickEngine/Renderer/MeshFactory.hpp"
