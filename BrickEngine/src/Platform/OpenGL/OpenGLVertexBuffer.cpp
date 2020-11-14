@@ -107,6 +107,7 @@ namespace BrickEngine {
 
 	void OpenGLVertexBuffer::SetData(void* data, uint32_t size)
 	{
+		glBindVertexArray(m_VertexArrayID);
 		glBindBuffer(GL_ARRAY_BUFFER, m_RendererID);
 		glBufferData(GL_ARRAY_BUFFER, size, data, GL_DYNAMIC_DRAW);
 	}
