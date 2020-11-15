@@ -17,6 +17,11 @@ namespace BrickEngine {
 
     Scene::~Scene()
     {
+        m_Registry.view<NativeScriptComponent>().each([&](entt::entity id, NativeScriptComponent& nsc) -> void
+            {
+                if (nsc.Instance)
+                    nsc.DestroyScript(nsc.Instance);
+            });
     }
 
     Entity Scene::CreateEntity(const std::string& name)
@@ -29,10 +34,17 @@ namespace BrickEngine {
 
     void Scene::DestroyEntity(Entity entity)
     {
-        if (entity.m_Scene == this)
-            m_Registry.destroy(entity);
-        else
+        if (entity.m_Scene != this)
             Log::Error("Attemped to destroy entity that is not of this scene!");
+        else
+        {
+            if (entity.HasComponent<NativeScriptComponent>())
+            {
+                auto& nsc = entity.GetComponent<NativeScriptComponent>();
+                nsc.DestroyScript(nsc.Instance);
+            }
+            m_Registry.destroy(entity);
+        }
     }
 
     void Scene::OnUpdate(float dt)
@@ -40,7 +52,7 @@ namespace BrickEngine {
         m_Registry.view<NativeScriptComponent>().each([&](entt::entity id, NativeScriptComponent& nsc) -> void
             {
                 if (!nsc.Instance)
-                    nsc.InstantiateScript(Entity(id, this));
+                    nsc.InstantiateScript(nsc.Instance, Entity(id, this));
                 nsc.Instance->OnUpdate(dt);
             });
     }

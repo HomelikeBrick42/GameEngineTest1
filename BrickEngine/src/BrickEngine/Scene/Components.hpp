@@ -30,14 +30,9 @@ namespace BrickEngine {
 
 		glm::mat4 ToMatrix() const
 		{
-			glm::mat4 rotationMatrix =
-				glm::rotate(glm::mat4(1.0f), glm::radians(Rotation.x), glm::vec3(1.0f, 0.0f, 0.0f)) *
-				glm::rotate(glm::mat4(1.0f), glm::radians(Rotation.y), glm::vec3(0.0f, 1.0f, 0.0f)) *
-				glm::rotate(glm::mat4(1.0f), glm::radians(Rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
-
 			return
 				glm::translate(glm::mat4(1.0f), Position) *
-				rotationMatrix *
+				(glm::mat4)glm::quat(glm::radians(Rotation)) *
 				glm::scale(glm::mat4(1.0f), Scale);
 		}
 
@@ -80,33 +75,25 @@ namespace BrickEngine {
 
 	struct NativeScriptComponent
 	{
-		NativeScriptComponent() = default;
-		~NativeScriptComponent()
-		{
-			if (Instance)
-				DestroyScript();
-		}
-
 		EntityScript* Instance = nullptr;
-		std::function<void(Entity)> InstantiateScript = nullptr;
-		std::function<void()> DestroyScript = nullptr;
+		void(*InstantiateScript)(EntityScript*&, Entity) = nullptr;
+		void(*DestroyScript)(EntityScript*&) = nullptr;
 
 		template<typename T, typename... Args>
 		void Bind(Args&&... args)
 		{
 			if (Instance)
-				DestroyScript();
-			InstantiateScript = [&](Entity entity)
+				DestroyScript(Instance);
+			InstantiateScript = [](EntityScript*& script, Entity entity)
 			{
-				Instance = new T(args...);
-				Instance->m_Entity = entity;
-				Instance->OnCreate();
+				script = new T(args...);
+				script->m_Entity = entity;
+				script->OnCreate();
 			};
-			DestroyScript = [&]()
+			DestroyScript = [](EntityScript*& script)
 			{
-				Instance->OnDestroy();
-				delete Instance;
-				Instance = nullptr;
+				script->OnDestroy();
+				delete script;
 			};
 		}
 	};

@@ -65,19 +65,19 @@ namespace BrickEngine {
 
     bool Input::GetKey(KeyCode key)
     {
-        BRICKENGINE_CORE_ASSERT((int32_t)key < 0 && (int32_t)key > 348, "Attempted to get invalid key: {0}", (int32_t)key);
+        BRICKENGINE_CORE_ASSERT((int32_t)key > 0 && (int32_t)key < 348, "Attempted to get invalid key: {0}", (int32_t)key);
         return s_Data->Keys[(int32_t)key];
     }
 
     bool Input::GetKeyDown(KeyCode key)
     {
-        BRICKENGINE_CORE_ASSERT((int32_t)key < 0 && (int32_t)key > 348, "Attempted to get invalid key: {0}", (int32_t)key);
+        BRICKENGINE_CORE_ASSERT((int32_t)key > 0 && (int32_t)key < 348, "Attempted to get invalid key: {0}", (int32_t)key);
         return s_Data->KeysDown[(int32_t)key];
     }
 
     bool Input::GetKeyUp(KeyCode key)
     {
-        BRICKENGINE_CORE_ASSERT((int32_t)key < 0 && (int32_t)key > 348, "Attempted to get invalid key: {0}", (int32_t)key);
+        BRICKENGINE_CORE_ASSERT((int32_t)key > 0 && (int32_t)key < 348, "Attempted to get invalid key: {0}", (int32_t)key);
         return s_Data->KeysUp[(int32_t)key];
     }
 
@@ -98,19 +98,19 @@ namespace BrickEngine {
 
     bool Input::GetMouseButton(MouseButton button)
     {
-        BRICKENGINE_CORE_ASSERT((int32_t)button < 0 && (int32_t)button > 8, "Attempted to get invalid mouse button: {0}", (int32_t)button);
+        BRICKENGINE_CORE_ASSERT((int32_t)button > 0 && (int32_t)button < 8, "Attempted to get invalid mouse button: {0}", (int32_t)button);
         return s_Data->MouseButtons[(int32_t)button];
     }
 
     bool Input::GetMouseButtonDown(MouseButton button)
     {
-        BRICKENGINE_CORE_ASSERT((int32_t)button < 0 && (int32_t)button > 8, "Attempted to get invalid mouse button: {0}", (int32_t)button);
+        BRICKENGINE_CORE_ASSERT((int32_t)button > 0 && (int32_t)button < 8, "Attempted to get invalid mouse button: {0}", (int32_t)button);
         return s_Data->MouseButtonsDown[(int32_t)button];
     }
 
     bool Input::GetMouseButtonUp(MouseButton button)
     {
-        BRICKENGINE_CORE_ASSERT((int32_t)button < 0 && (int32_t)button > 8, "Attempted to get invalid mouse button: {0}", (int32_t)button);
+        BRICKENGINE_CORE_ASSERT((int32_t)button > 0 && (int32_t)button < 8, "Attempted to get invalid mouse button: {0}", (int32_t)button);
         return s_Data->MouseButtonsUp[(int32_t)button];
     }
 
