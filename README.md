@@ -4,7 +4,7 @@ This is a early stage game engine.
 Currently tested compilers
   - Visual Studio 2019
 
-Clone the repository with `git clone --recursive https://https://github.com/HomelikeBrick42/GameEngineTest1`.
+Clone the repository with `git clone --recursive https://github.com/HomelikeBrick42/GameEngineTest1`.
 
 ## Features
   - Entity Component System
