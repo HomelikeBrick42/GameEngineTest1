@@ -26,9 +26,12 @@ namespace BrickEngine {
 		virtual void SetEventCallback(const EventCallbackFn& eventCallback) override;
 		virtual void SetVSync(bool enabled) override;
 		virtual bool IsVSync() const override { return m_Data.VSync; }
+		virtual void LockMouse(bool enabled) override;
+		virtual bool GetMouseLocked() override { return m_MouseLocked; }
 	private:
 		GLFWwindow* m_WindowHandle = nullptr;
 		Scope<GraphicsContext> m_Context = nullptr;
+		bool m_MouseLocked = false;
 
 		struct WindowData
 		{

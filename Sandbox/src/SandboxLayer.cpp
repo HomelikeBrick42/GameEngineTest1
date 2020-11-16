@@ -30,6 +30,9 @@ void SandboxLayer::OnUpdate(float dt)
 	RenderCommand::SetClearColor(glm::vec3(0.1f, 0.1f, 0.1f));
 	RenderCommand::Clear();
 	m_Scene.OnRender();
+
+	if (Input::GetKeyDown(KeyCode::Escape))
+		Application::Get().GetWindow()->LockMouse(m_CursorLocked = !m_CursorLocked);
 }
 
 void SandboxLayer::OnImGuiRender()

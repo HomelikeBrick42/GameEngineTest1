@@ -146,6 +146,12 @@ namespace BrickEngine {
 		glfwSwapInterval(enabled ? 1 : 0);
 	}
 
+	void WindowsWindow::LockMouse(bool enabled)
+	{
+		m_MouseLocked = enabled;
+		glfwSetInputMode(m_WindowHandle, GLFW_CURSOR, enabled ? GLFW_CURSOR_DISABLED : GLFW_CURSOR_NORMAL);
+	}
+
 }
 
 #endif

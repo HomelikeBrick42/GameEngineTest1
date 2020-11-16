@@ -56,6 +56,9 @@ public:
 		if (Input::GetKey(KeyCode::Right))
 			m_Transform->Rotation.y -= 75.0f * dt;
 
+		if (Application::Get().GetWindow()->GetMouseLocked())
+			m_Transform->Rotation.yx -= Input::GetMouseDelta() * 0.2f;
+
 		m_Transform->Rotation.x = glm::max(glm::min(m_Transform->Rotation.x, 90.0f), -90.0f);
 	}
 private:

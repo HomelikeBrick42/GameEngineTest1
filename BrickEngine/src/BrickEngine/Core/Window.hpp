@@ -32,6 +32,8 @@ namespace BrickEngine {
 		virtual void SetEventCallback(const EventCallbackFn& eventCallback) = 0;
 		virtual void SetVSync(bool enabled) = 0;
 		virtual bool IsVSync() const = 0;
+		virtual void LockMouse(bool enabled) = 0;
+		virtual bool GetMouseLocked() = 0;
 
 		static Ref<Window> Create(const WindowProps& props = WindowProps());
 	protected:
