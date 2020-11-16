@@ -5,6 +5,7 @@ layout(location = 0) out vec4 o_Color;
 uniform vec4 u_Color = vec4(1.0);
 
 in vec3 v_Normal;
+out vec2 v_TexCoord;
 
 void main()
 {

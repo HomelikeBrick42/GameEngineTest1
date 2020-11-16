@@ -8,6 +8,7 @@ namespace BrickEngine {
 	class RenderCommand
 	{
 	public:
+		RenderCommand() = delete;
 		static void Init() { s_RendererAPI->Init(); }
 		static void SetClearColor(const glm::vec3& color) { s_RendererAPI->SetClearColor(color); }
 		static void Clear() { s_RendererAPI->Clear(); }

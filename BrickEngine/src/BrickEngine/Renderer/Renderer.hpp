@@ -12,6 +12,7 @@ namespace BrickEngine {
 	class Renderer
 	{
 	public:
+		Renderer() = delete;
 		static void Init();
 		static void Shutdown();
 

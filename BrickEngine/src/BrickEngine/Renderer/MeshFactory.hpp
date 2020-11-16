@@ -9,9 +9,8 @@ namespace BrickEngine {
 	class MeshFactory
 	{
 	public:
+		MeshFactory() = delete;
 		static Ref<Mesh> GenerateCube(const glm::vec3& size);
-	private:
-		MeshFactory() = default;
 	};
 
 }

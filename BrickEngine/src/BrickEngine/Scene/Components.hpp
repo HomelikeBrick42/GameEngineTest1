@@ -84,13 +84,13 @@ namespace BrickEngine {
 		{
 			if (Instance)
 				DestroyScript(Instance);
-			InstantiateScript = [](EntityScript*& script, Entity entity)
+			InstantiateScript = [](EntityScript*& script, Entity entity) -> void
 			{
 				script = new T(args...);
 				script->m_Entity = entity;
 				script->OnCreate();
 			};
-			DestroyScript = [](EntityScript*& script)
+			DestroyScript = [](EntityScript*& script) -> void
 			{
 				script->OnDestroy();
 				delete script;
