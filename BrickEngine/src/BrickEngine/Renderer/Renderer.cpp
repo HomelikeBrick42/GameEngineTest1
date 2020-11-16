@@ -32,7 +32,7 @@ namespace BrickEngine {
 		shader->SetFloat4("u_Color", color);
 		shader->SetFloatMatrix4x4("u_Model", transform);
 		mesh->Bind();
-		RenderCommand::DrawIndexed(mesh->GetIndexBuffer()->GetCount());
+		RenderCommand::DrawIndexed(mesh->GetIndexCount());
 	}
 
 	void Renderer::End()

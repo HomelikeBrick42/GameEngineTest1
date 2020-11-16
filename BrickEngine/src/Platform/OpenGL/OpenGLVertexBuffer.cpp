@@ -87,7 +87,7 @@ namespace BrickEngine {
 				ShaderDataTypeToOpenGLType(element.Type),
 				element.Normalized ? GL_TRUE : GL_FALSE,
 				m_Layout.GetStride(),
-				(const void*)element.Offset
+				(const void*)(size_t)element.Offset
 			);
 			index++;
 		}
@@ -109,7 +109,7 @@ namespace BrickEngine {
 	{
 		glBindVertexArray(m_VertexArrayID);
 		glBindBuffer(GL_ARRAY_BUFFER, m_RendererID);
-		glBufferData(GL_ARRAY_BUFFER, size, data, GL_DYNAMIC_DRAW);
+		glBufferSubData(GL_ARRAY_BUFFER, 0, size, data);
 	}
 
 }

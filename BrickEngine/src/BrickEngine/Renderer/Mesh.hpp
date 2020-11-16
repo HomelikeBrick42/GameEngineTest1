@@ -2,6 +2,7 @@
 
 #include "BrickEngine/Core/Base.hpp"
 
+#include "BrickEngine/Renderer/Vertex.hpp"
 #include "BrickEngine/Renderer/VertexBuffer.hpp"
 #include "BrickEngine/Renderer/IndexBuffer.hpp"
 
@@ -10,19 +11,25 @@ namespace BrickEngine {
 	class Mesh
 	{
 	public:
-		Mesh(const Ref<VertexBuffer>& vertexBuffer, const Ref<IndexBuffer>& indexBuffer)
-			: m_VertexBuffer(vertexBuffer), m_IndexBuffer(indexBuffer) {}
+		Mesh();
+		Mesh(const std::vector<Vertex>& vertices, const std::vector<uint32_t>& indices);
 
-		void Bind() { if (m_VertexBuffer) m_VertexBuffer->Bind(); if (m_IndexBuffer) m_IndexBuffer->Bind(); }
-		void UnBind() { if (m_VertexBuffer) m_VertexBuffer->UnBind(); if (m_IndexBuffer) m_IndexBuffer->UnBind(); }
+		void Bind();
+		void UnBind();
 
-		void SetVertexBuffer(const Ref<VertexBuffer>& vertexBuffer) { m_VertexBuffer = vertexBuffer; }
-		void SetIndexBuffer(const Ref<IndexBuffer>& indexBuffer) { m_IndexBuffer = indexBuffer; }
-		Ref<VertexBuffer> GetVertexBuffer() const { return m_VertexBuffer; }
-		Ref<IndexBuffer> GetIndexBuffer() const { return m_IndexBuffer; }
+		uint32_t GetIndexCount() const { return m_IndexBuffer->GetCount(); }
+
+		std::vector<Vertex>& GetVertices() { return m_Vertices; }
+		std::vector<uint32_t>& GetIndices() { return m_Indices; }
+		const std::vector<Vertex>& GetVertices() const { return m_Vertices; }
+		const std::vector<uint32_t>& GetIndices() const { return m_Indices; }
 	private:
 		Ref<VertexBuffer> m_VertexBuffer;
 		Ref<IndexBuffer> m_IndexBuffer;
+		std::vector<Vertex> m_Vertices;
+		std::vector<uint32_t> m_Indices;
+		bool m_ToUpdateVertexData = false;
+		bool m_ToUpdateIndexData = false;
 	};
 
 }
