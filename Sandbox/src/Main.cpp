@@ -1,9 +1,7 @@
-#include <BrickEngine.hpp>
+#include "pch.hpp"
 #include <BrickEngine/EntryPoint.hpp>
 
 #include "SandboxLayer.hpp"
-
-using namespace BrickEngine;
 
 class Sandbox : public Application
 {
