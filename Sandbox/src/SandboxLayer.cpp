@@ -8,8 +8,9 @@ void SandboxLayer::OnAttach()
 	m_Shader = Shader::Create("assets/shaders/FlatColor.vert.glsl", "assets/shaders/FlatColor.frag.glsl");
 	m_Mesh = MeshFactory::GenerateCube(glm::vec3(1.0f, 1.0f, 1.0f));
 
+	Ref<Material> material = CreateRef<Material>(m_Shader, glm::vec4(1.0f, 1.0f, 0.0f, 1.0f));
 	Entity cube = m_Scene.CreateEntity("Cube");
-	cube.AddComponent<MeshRendererComponent>(m_Shader, m_Mesh, glm::vec4(1.0f, 1.0f, 0.0f, 1.0f));
+	cube.AddComponent<MeshRendererComponent>(material, m_Mesh);
 	cube.AddComponent<NativeScriptComponent>().Bind<RotateScript>();
 
 	Entity camera = m_Scene.CreateEntity("Camera");
@@ -24,15 +25,15 @@ void SandboxLayer::OnDetach()
 
 void SandboxLayer::OnUpdate(float dt)
 {
+	if (Input::GetKeyDown(KeyCode::Escape))
+		Application::Get().GetWindow()->LockMouse(m_CursorLocked = !m_CursorLocked);
+
 	m_FPS = 1.0f / dt;
 	m_Scene.OnUpdate(dt);
 
 	RenderCommand::SetClearColor(glm::vec3(0.1f, 0.1f, 0.1f));
 	RenderCommand::Clear();
 	m_Scene.OnRender();
-
-	if (Input::GetKeyDown(KeyCode::Escape))
-		Application::Get().GetWindow()->LockMouse(m_CursorLocked = !m_CursorLocked);
 }
 
 void SandboxLayer::OnImGuiRender()

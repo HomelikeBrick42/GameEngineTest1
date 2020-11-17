@@ -11,13 +11,12 @@ namespace BrickEngine {
 	class Mesh
 	{
 	public:
-		Mesh();
 		Mesh(const std::vector<Vertex>& vertices, const std::vector<uint32_t>& indices);
 
 		void Bind();
 		void UnBind();
 
-		uint32_t GetIndexCount() const { return m_IndexBuffer->GetCount(); }
+		uint32_t GetIndexCount() const { return static_cast<uint32_t>(m_Indices.size()); }
 
 		std::vector<Vertex>& GetVertices() { return m_Vertices; }
 		std::vector<uint32_t>& GetIndices() { return m_Indices; }

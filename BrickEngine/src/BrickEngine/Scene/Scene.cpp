@@ -78,7 +78,7 @@ namespace BrickEngine {
                 auto& tc = objects.get<TransformComponent>(id);
                 auto& msc = objects.get<MeshRendererComponent>(id);
                 if (msc)
-                    Renderer::Submit(msc.Mesh, msc.Shader, msc.Color, tc);
+                    Renderer::Submit(msc.Mesh, msc.Material, tc);
             }
             Renderer::End();
         }

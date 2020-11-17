@@ -35,6 +35,17 @@ namespace BrickEngine {
 		RenderCommand::DrawIndexed(mesh->GetIndexCount());
 	}
 
+	void Renderer::Submit(const Ref<Mesh> mesh, const Ref<Material> material, const glm::mat4& transform)
+	{
+		material->Bind();
+		Ref<Shader> shader = material->GetShader();
+		shader->SetFloatMatrix4x4("u_ViewProjection", s_Data->ViewProjection);
+		shader->SetFloatMatrix4x4("u_Model", transform);
+		shader->SetFloatMatrix4x4("u_Model", transform);
+		mesh->Bind();
+		RenderCommand::DrawIndexed(mesh->GetIndexCount());
+	}
+
 	void Renderer::End()
 	{
 	}

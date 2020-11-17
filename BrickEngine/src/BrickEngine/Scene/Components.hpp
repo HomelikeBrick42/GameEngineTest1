@@ -6,7 +6,7 @@
 
 #include "BrickEngine/Scene/EntityScript.hpp"
 
-#include "BrickEngine/Renderer/Shader.hpp"
+#include "BrickEngine/Renderer/Material.hpp"
 #include "BrickEngine/Renderer/Mesh.hpp"
 
 namespace BrickEngine {
@@ -61,16 +61,15 @@ namespace BrickEngine {
 
 	struct MeshRendererComponent
 	{
-		Ref<Shader> Shader;
+		Ref<Material> Material;
 		Ref<Mesh> Mesh;
-		glm::vec4 Color;
 		
 		MeshRendererComponent()
-			: Shader(nullptr), Mesh(nullptr), Color(1.0f) {}
-		MeshRendererComponent(const Ref<BrickEngine::Shader>& shader, const Ref<BrickEngine::Mesh>& mesh, const glm::vec4& color)
-			: Shader(shader), Mesh(mesh), Color(color) {}
+			: Material(nullptr), Mesh(nullptr) {}
+		MeshRendererComponent(const Ref<BrickEngine::Material>& shader, const Ref<BrickEngine::Mesh>& mesh)
+			: Material(shader), Mesh(mesh) {}
 
-		operator bool() const { return Shader != nullptr && Mesh != nullptr; }
+		operator bool() const { return Material != nullptr && Mesh != nullptr; }
 	};
 
 	struct NativeScriptComponent

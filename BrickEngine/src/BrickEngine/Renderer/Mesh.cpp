@@ -3,14 +3,6 @@
 
 namespace BrickEngine {
 
-	Mesh::Mesh()
-		: m_VertexBuffer(nullptr), m_IndexBuffer(nullptr), m_Vertices({}), m_Indices({})
-	{
-		m_VertexBuffer = VertexBuffer::Create(m_Vertices.data(), static_cast<uint32_t>(m_Vertices.size() * sizeof(Vertex)));
-		m_VertexBuffer->SetLayout(Vertex::GetLayout());
-		m_IndexBuffer = IndexBuffer::Create(m_Indices.data(), static_cast<uint32_t>(m_Indices.size()));
-	}
-
 	Mesh::Mesh(const std::vector<Vertex>& vertices, const std::vector<uint32_t>& indices)
 		: m_VertexBuffer(nullptr), m_IndexBuffer(nullptr), m_Vertices(vertices), m_Indices(indices)
 	{
