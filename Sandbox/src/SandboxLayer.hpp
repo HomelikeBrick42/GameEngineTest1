@@ -17,6 +17,7 @@ private:
 	Scene m_Scene;
 	Ref<Shader> m_Shader;
 	Ref<Mesh> m_Mesh;
+	Ref<Texture2D> m_Texture;
 	bool m_CursorLocked = false;
 private:
 	float m_FPS = 0.0f;

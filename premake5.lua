@@ -23,6 +23,7 @@ IncludeDir["glad"] = "%{wks.location}/BrickEngine/vendor/glad/include"
 IncludeDir["ImGui"] = "%{wks.location}/BrickEngine/vendor/imgui"
 IncludeDir["glm"] = "%{wks.location}/BrickEngine/vendor/glm"
 IncludeDir["entt"] = "%{wks.location}/BrickEngine/vendor/entt/single_include"
+IncludeDir["stb_image"] = "%{wks.location}/BrickEngine/vendor/stb_image"
 
 group "Dependencies"
 	include "BrickEngine/vendor/GLFW"
@@ -48,7 +49,8 @@ project "BrickEngine"
 		"%{prj.name}/src/**.hpp",
 		"%{prj.name}/src/**.cpp",
 		"%{prj.name}/vendor/glm/glm/**.hpp",
-		"%{prj.name}/vendor/glm/glm/**.inl"
+		"%{prj.name}/vendor/glm/glm/**.inl",
+		"%{prj.name}/vendor/stb_image/stb_image.cpp"
 	}
 	
 	includedirs
@@ -59,7 +61,8 @@ project "BrickEngine"
 		"%{IncludeDir.glad}",
 		"%{IncludeDir.ImGui}",
 		"%{IncludeDir.glm}",
-		"%{IncludeDir.entt}"
+		"%{IncludeDir.entt}",
+		"%{IncludeDir.stb_image}"
 	}
 	
 	links

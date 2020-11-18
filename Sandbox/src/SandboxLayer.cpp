@@ -7,8 +7,10 @@ void SandboxLayer::OnAttach()
 {
 	m_Shader = Shader::Create("assets/shaders/FlatColor.vert.glsl", "assets/shaders/FlatColor.frag.glsl");
 	m_Mesh = MeshFactory::GenerateCube(glm::vec3(1.0f, 1.0f, 1.0f));
+	m_Texture = Texture2D::Create("assets/textures/Checkerboard.png");
 
-	Ref<Material> material = CreateRef<Material>(m_Shader, glm::vec4(1.0f, 1.0f, 0.0f, 1.0f));
+	Ref<Material> material = CreateRef<Material>(m_Shader, m_Texture, glm::vec4(1.0f, 1.0f, 0.0f, 1.0f));
+
 	Entity cube = m_Scene.CreateEntity("Cube");
 	cube.AddComponent<MeshRendererComponent>(material, m_Mesh);
 	cube.AddComponent<NativeScriptComponent>().Bind<RotateScript>();

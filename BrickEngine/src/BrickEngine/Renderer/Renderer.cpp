@@ -6,12 +6,16 @@ namespace BrickEngine {
 	struct RendererData
 	{
 		glm::mat4 ViewProjection;
+		Ref<Texture2D> WhitePixelTexture;
 	};
 	static Scope<RendererData> s_Data = nullptr;
 
 	void Renderer::Init()
 	{
 		s_Data = CreateScope<RendererData>();
+		s_Data->WhitePixelTexture = Texture2D::Create(1, 1);
+		uint32_t whitePixel = 0xffffffff;
+		s_Data->WhitePixelTexture->SetData(&whitePixel, sizeof(uint32_t));
 		RenderCommand::Init();
 	}
 
@@ -30,19 +34,24 @@ namespace BrickEngine {
 		shader->SetFloatMatrix4x4("u_ViewProjection", s_Data->ViewProjection);
 		shader->SetFloatMatrix4x4("u_Model", transform);
 		shader->SetFloat4("u_Color", color);
-		shader->SetFloatMatrix4x4("u_Model", transform);
 		mesh->Bind();
+		s_Data->WhitePixelTexture->Bind(16);
+		shader->SetInt("u_Texture", 16);
 		RenderCommand::DrawIndexed(mesh->GetIndexCount());
 	}
 
 	void Renderer::Submit(const Ref<Mesh> mesh, const Ref<Material> material, const glm::mat4& transform)
 	{
-		material->Bind();
 		Ref<Shader> shader = material->GetShader();
 		shader->SetFloatMatrix4x4("u_ViewProjection", s_Data->ViewProjection);
 		shader->SetFloatMatrix4x4("u_Model", transform);
-		shader->SetFloatMatrix4x4("u_Model", transform);
 		mesh->Bind();
+		material->Bind(0);
+		if (!material->GetTexture())
+		{
+			s_Data->WhitePixelTexture->Bind(16);
+			shader->SetInt("u_Texture", 16);
+		}
 		RenderCommand::DrawIndexed(mesh->GetIndexCount());
 	}
 

@@ -7,6 +7,7 @@
 #include "BrickEngine/Renderer/Shader.hpp"
 #include "BrickEngine/Renderer/Material.hpp"
 #include "BrickEngine/Renderer/Mesh.hpp"
+#include "BrickEngine/Renderer/Texture2D.hpp"
 
 namespace BrickEngine {
 

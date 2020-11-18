@@ -15,7 +15,7 @@ namespace BrickEngine {
             BRICKENGINE_CORE_ASSERT(false, "RendererAPI::None is not supported!");
             return nullptr;
         case RendererAPI::API::OpenGL:
-            return CreateScope<OpenGLShader>(vertexPath, fragmentPath);
+            return CreateRef<OpenGLShader>(vertexPath, fragmentPath);
         }
 
         BRICKENGINE_CORE_ASSERT(false, "Unknown RendererAPI!");
