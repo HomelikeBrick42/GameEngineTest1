@@ -35,9 +35,9 @@ public:
 		glm::vec3 right = glm::normalize(glm::cross(forward, glm::vec3(0.0f, 1.0f, 0.0f)));
 
 		if (Input::GetKey(KeyCode::W))
-			m_Transform->Position -= forward * speed * dt;
-		if (Input::GetKey(KeyCode::S))
 			m_Transform->Position += forward * speed * dt;
+		if (Input::GetKey(KeyCode::S))
+			m_Transform->Position -= forward * speed * dt;
 		if (Input::GetKey(KeyCode::A))
 			m_Transform->Position += right * speed * dt;
 		if (Input::GetKey(KeyCode::D))
@@ -48,16 +48,16 @@ public:
 			m_Transform->Position.y -= speed * dt;
 
 		if (Input::GetKey(KeyCode::Up))
-			m_Transform->Rotation.x += 75.0f * dt;
-		if (Input::GetKey(KeyCode::Down))
 			m_Transform->Rotation.x -= 75.0f * dt;
+		if (Input::GetKey(KeyCode::Down))
+			m_Transform->Rotation.x += 75.0f * dt;
 		if (Input::GetKey(KeyCode::Left))
-			m_Transform->Rotation.y += 75.0f * dt;
-		if (Input::GetKey(KeyCode::Right))
 			m_Transform->Rotation.y -= 75.0f * dt;
+		if (Input::GetKey(KeyCode::Right))
+			m_Transform->Rotation.y += 75.0f * dt;
 
 		if (Application::Get().GetWindow()->GetMouseLocked())
-			m_Transform->Rotation.yx -= Input::GetMouseDelta() * 0.2f;
+			m_Transform->Rotation.yx += Input::GetMouseDelta() * 0.2f;
 
 		m_Transform->Rotation.x = glm::max(glm::min(m_Transform->Rotation.x, 90.0f), -90.0f);
 	}

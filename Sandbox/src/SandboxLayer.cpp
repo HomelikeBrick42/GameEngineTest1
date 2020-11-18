@@ -16,7 +16,7 @@ void SandboxLayer::OnAttach()
 	cube.AddComponent<NativeScriptComponent>().Bind<RotateScript>();
 
 	Entity camera = m_Scene.CreateEntity("Camera");
-	camera.GetComponent<TransformComponent>().Position.z = 3.0f;
+	camera.GetComponent<TransformComponent>().Position.z = -3.0f;
 	camera.AddComponent<CameraComponent>();
 	camera.AddComponent<NativeScriptComponent>().Bind<CameraControllerScript>();
 }
