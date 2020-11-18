@@ -7,8 +7,12 @@ namespace BrickEngine {
 	{
 		glm::mat4 ViewProjection;
 		Ref<Texture2D> WhitePixelTexture;
+		std::vector<glm::mat4> Transforms;
+		std::vector<Ref<Material>> Materials;
+		std::vector<Ref<Mesh>> Meshes;
 	};
 	static Scope<RendererData> s_Data = nullptr;
+	constexpr int32_t WhiteTextureSlot = 16;
 
 	void Renderer::Init()
 	{
@@ -28,6 +32,14 @@ namespace BrickEngine {
 		s_Data->ViewProjection = viewProjection;
 	}
 
+	//void Renderer::Submit(const Ref<Mesh> mesh, const Ref<Shader> shader, const glm::vec4& color, const glm::mat4& transform)
+	//{
+	//}
+	//
+	//void Renderer::Submit(const Ref<Mesh> mesh, const Ref<Material> material, const glm::mat4& transform)
+	//{
+	//}
+
 	void Renderer::Submit(const Ref<Mesh> mesh, const Ref<Shader> shader, const glm::vec4& color, const glm::mat4& transform)
 	{
 		shader->Bind();
@@ -35,11 +47,11 @@ namespace BrickEngine {
 		shader->SetFloatMatrix4x4("u_Model", transform);
 		shader->SetFloat4("u_Color", color);
 		mesh->Bind();
-		s_Data->WhitePixelTexture->Bind(16);
-		shader->SetInt("u_Texture", 16);
+		s_Data->WhitePixelTexture->Bind(WhiteTextureSlot);
+		shader->SetInt("u_Texture", WhiteTextureSlot);
 		RenderCommand::DrawIndexed(mesh->GetIndexCount());
 	}
-
+	
 	void Renderer::Submit(const Ref<Mesh> mesh, const Ref<Material> material, const glm::mat4& transform)
 	{
 		Ref<Shader> shader = material->GetShader();
@@ -49,8 +61,8 @@ namespace BrickEngine {
 		material->Bind(0);
 		if (!material->GetTexture())
 		{
-			s_Data->WhitePixelTexture->Bind(16);
-			shader->SetInt("u_Texture", 16);
+			s_Data->WhitePixelTexture->Bind(WhiteTextureSlot);
+			shader->SetInt("u_Texture", WhiteTextureSlot);
 		}
 		RenderCommand::DrawIndexed(mesh->GetIndexCount());
 	}
